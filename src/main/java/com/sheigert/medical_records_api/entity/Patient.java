@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
