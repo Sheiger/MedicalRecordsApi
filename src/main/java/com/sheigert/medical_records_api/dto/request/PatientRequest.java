@@ -15,7 +15,7 @@ public class PatientRequest {
     @NotBlank(message = "Document id is required")
     private String documentId;
 
-    @NotNull(message = "Borth date id required")
+    @NotNull(message = "Birth date id required")
     private LocalDate birthDate;
 
     private String phone;
