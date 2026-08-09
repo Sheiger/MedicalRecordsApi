@@ -8,7 +8,7 @@ import lombok.Data;
 public class MedicalRecordRequest {
 
     @NotNull(message = "Appointment Id is required")
-    private Long appointment;
+    private Long appointmentId;
 
     @NotBlank(message = "Diagnosis is required")
     private String diagnosis;

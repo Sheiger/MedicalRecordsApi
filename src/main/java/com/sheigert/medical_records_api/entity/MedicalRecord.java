@@ -26,7 +26,7 @@ public class MedicalRecord {
     @Column(columnDefinition = "TEXT")
     private String treatment;
 
-    private String attachmenUrl;
+    private String attachmentUrl;
 
     @Column(nullable = false)
     private boolean active = true;
