@@ -39,6 +39,12 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.findByDoctorId(doctorId));
     }
 
+    @GetMapping("/doctor/{doctorId}/without-record")
+    @PreAuthorize("hasRole('DOCTOR')")
+    public ResponseEntity<List<AppointmentResponse>> findByDoctorWithoutRecord(@PathVariable Long doctorId) {
+        return ResponseEntity.ok(appointmentService.findByDoctorIdWithoutMedicalRecord(doctorId));
+    }
+
     @GetMapping("/patient/{patientId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST', 'PATIENT')")
     public ResponseEntity<List<AppointmentResponse>> findByPatient(@PathVariable Long patientId) {
@@ -52,7 +58,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPCIONIST')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'RECEPTIONIST')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         appointmentService.delete(id);
         return ResponseEntity.noContent().build();

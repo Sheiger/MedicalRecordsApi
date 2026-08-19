@@ -56,6 +56,12 @@ public class AppointmentService {
                 .toList();
     }
 
+    public List<AppointmentResponse> findByDoctorIdWithoutMedicalRecord(Long doctorId) {
+        return appointmentRepository.findByDoctorIdWithoutMedicalRecord(doctorId).stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
     public List<AppointmentResponse> findByPatientId(Long patientId) {
         return appointmentRepository.findByPatientId(patientId).stream()
                 .map(this::toResponse).toList();

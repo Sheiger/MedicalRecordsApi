@@ -32,6 +32,12 @@ public class MedicalRecordController {
         return ResponseEntity.ok(medicalRecordService.findAll());
     }
 
+    @GetMapping("/mine")
+    @PreAuthorize("hasAnyRole('DOCTOR', 'PATIENT')")
+    public ResponseEntity<List<MedicalRecordResponse>> findMine() {
+        return ResponseEntity.ok(medicalRecordService.findMine());
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'DOCTOR', 'PATIENT')")
     public ResponseEntity<MedicalRecordResponse> findById(@PathVariable Long id) {

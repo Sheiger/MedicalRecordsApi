@@ -78,6 +78,18 @@ public class MedicalRecordService {
                 .toList();
     }
 
+    public List<MedicalRecordResponse> findMine() {
+        User currentUser = authenticatedUserProvider.getCurrentUser();
+
+        List<MedicalRecord> records = switch (currentUser.getRole()) {
+            case DOCTOR -> medicalRecordRepository.findByAppointment_Doctor_IdAndActiveTrue(currentUser.getId());
+            case PATIENT -> medicalRecordRepository.findByAppointment_Patient_User_IdAndActiveTrue(currentUser.getId());
+            default -> throw new AccessDeniedException("This endpoint is only available for doctors and patients");
+        };
+
+        return records.stream().map(this::toResponse).toList();
+    }
+
     public MedicalRecordResponse update(Long id, MedicalRecordRequest request) {
         User currentUser = authenticatedUserProvider.getCurrentUser();
 
